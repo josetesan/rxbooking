@@ -1,4 +1,4 @@
-package com.nanopia.proto.rxjava.simple.dao;
+package com.nanopia.proto.rxjava.dao.simple;
 
 import com.nanopia.proto.rxjava.entities.Flight;
 import org.slf4j.Logger;

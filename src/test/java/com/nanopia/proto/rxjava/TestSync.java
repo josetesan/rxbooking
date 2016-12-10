@@ -3,9 +3,9 @@ package com.nanopia.proto.rxjava;
 import com.nanopia.proto.rxjava.entities.Flight;
 import com.nanopia.proto.rxjava.entities.Passenger;
 import com.nanopia.proto.rxjava.entities.Ticket;
-import com.nanopia.proto.rxjava.simple.dao.FlightRepo;
-import com.nanopia.proto.rxjava.simple.dao.PassengerRepo;
-import com.nanopia.proto.rxjava.simple.dao.TicketBooking;
+import com.nanopia.proto.rxjava.dao.simple.FlightRepo;
+import com.nanopia.proto.rxjava.dao.simple.PassengerRepo;
+import com.nanopia.proto.rxjava.dao.simple.TicketBooking;
 import org.junit.Before;
 import org.junit.Test;
 

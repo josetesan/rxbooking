@@ -1,4 +1,4 @@
-package com.nanopia.proto.rxjava.rx.dao;
+package com.nanopia.proto.rxjava.dao.simple;
 
 import com.nanopia.proto.rxjava.entities.Flight;
 import com.nanopia.proto.rxjava.entities.Passenger;
@@ -11,17 +11,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by josete on 10/12/16.
  */
-public class RxTicketBooking {
+public class TicketBooking {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RxTicketBooking.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TicketBooking.class);
 
-    public Ticket bookTicket(Flight flight, Passenger passenger)  {
+    public static Ticket bookTicket(Flight flight, Passenger passenger) throws Exception {
         LOGGER.info("Booking flight {} for passenger {}",flight ,passenger);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (final Exception ex) {
-
-        }
+        TimeUnit.SECONDS.sleep(1);
         Ticket ticket =  new Ticket(1L,flight,passenger);
         LOGGER.info("Booked ticket {}",ticket)  ;
         return ticket;
