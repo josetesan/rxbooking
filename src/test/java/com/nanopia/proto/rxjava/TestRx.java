@@ -1,13 +1,15 @@
 package com.nanopia.proto.rxjava;
 
-import com.nanopia.proto.rxjava.entities.Flight;
-import com.nanopia.proto.rxjava.entities.Passenger;
-import com.nanopia.proto.rxjava.entities.Ticket;
 import com.nanopia.proto.rxjava.dao.rx.RxFlightRepo;
 import com.nanopia.proto.rxjava.dao.rx.RxPassengerRepo;
 import com.nanopia.proto.rxjava.dao.rx.RxTicketBooking;
+import com.nanopia.proto.rxjava.entities.Flight;
+import com.nanopia.proto.rxjava.entities.Passenger;
+import com.nanopia.proto.rxjava.entities.Ticket;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rx.Observable;
 
 /**
@@ -15,10 +17,11 @@ import rx.Observable;
  */
 public class TestRx {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestRx.class);
 
-    RxFlightRepo flightRepo;
-    RxPassengerRepo passengerRepo;
-    RxTicketBooking ticketBooking;
+    private RxFlightRepo flightRepo;
+    private RxPassengerRepo passengerRepo;
+    private RxTicketBooking ticketBooking;
 
     @Before
     public void setup() {
@@ -29,10 +32,12 @@ public class TestRx {
 
     @Test
     public void testRx() throws Exception {
+        LOGGER.info("Starting")  ;
         Observable<Flight> flight =  flightRepo.findFlight("LAX-145");
         Observable<Passenger> passenger = passengerRepo.findPassenger(4L);
         Observable<Ticket> ticket = flight
                 .zipWith(passenger, (f,p) -> ticketBooking.bookTicket(f,p));
+        LOGGER.info("Subscribing")  ;
         ticket.subscribe(Mailer::sendEmail);
     }
 }

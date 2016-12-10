@@ -15,11 +15,11 @@ public class RxPassengerRepo {
     private static final Logger LOGGER = LoggerFactory.getLogger(RxPassengerRepo.class);
 
     public Observable<Passenger> findPassenger(Long id)  {
-        LOGGER.info("Searching passenger {}",id);
         return Observable.defer(() -> Observable.just(lookup(id)));
     }
 
     private Passenger lookup(Long id) {
+        LOGGER.info("Searching passenger {}",id);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (final Exception ex) {

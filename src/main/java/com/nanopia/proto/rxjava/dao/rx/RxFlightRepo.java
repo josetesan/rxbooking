@@ -16,11 +16,11 @@ public class RxFlightRepo {
     private static final Logger LOGGER = LoggerFactory.getLogger(RxFlightRepo.class);
 
     public Observable<Flight> findFlight(String name)  {
-        LOGGER.info("Searching flight {}",name);
         return Observable.defer(() -> Observable.just(lookup(name)));
     }
 
     private Flight lookup(String name) {
+        LOGGER.info("Searching flight {}",name);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (final Exception ex) {
