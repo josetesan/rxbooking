@@ -17,6 +17,6 @@ public class Mailer {
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (Exception e ){}
-        LOGGER.info("Sent email");
+        LOGGER.info("Sent email for ticket {}", ticket);
     }
 }

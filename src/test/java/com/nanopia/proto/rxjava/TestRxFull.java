@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by josete on 10/12/16.
@@ -33,10 +34,13 @@ public class TestRxFull {
     @Test
     public void testRxFull() throws Exception {
         LOGGER.info("Starting")  ;
-        Observable<Flight> flight =  flightRepo.findFlight("LAX-145");
-        Observable<Passenger> passenger = passengerRepo.findPassenger(4L);
+        Observable<Flight> flight =   flightRepo.findFlight("LAX-145")
+                                                .subscribeOn(Schedulers.io());
+
+        Observable<Passenger> passenger =   passengerRepo.findPassenger(4L)
+                                                         .subscribeOn(Schedulers.io());
         Observable<Ticket> ticket = flight
-                .zipWith(passenger, (Flight f,Passenger p) -> ticketBooking.bookTicket(f,p))
+                .zipWith(passenger, ( f, p) -> ticketBooking.bookTicket(f,p))
                 .flatMap(obs -> obs);
         LOGGER.info("Subscribing")  ;
         ticket.subscribe(Mailer::sendEmail);
