@@ -5,6 +5,7 @@ import com.nanopia.proto.rxjava.entities.Passenger;
 import com.nanopia.proto.rxjava.entities.Ticket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rx.Observable;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +16,11 @@ public class RxTicketBooking {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RxTicketBooking.class);
 
-    public Ticket bookTicket(Flight flight, Passenger passenger)  {
+    public Observable<Ticket> bookTicket(Flight flight, Passenger passenger)  {
+        return Observable.defer(() -> Observable.just(book(flight,passenger)));
+    }
+
+    private Ticket book(Flight flight, Passenger passenger) {
         LOGGER.info("Booking flight {} for passenger {}",flight ,passenger);
         try {
             TimeUnit.SECONDS.sleep(1);

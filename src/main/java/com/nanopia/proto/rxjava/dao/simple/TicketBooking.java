@@ -15,9 +15,13 @@ public class TicketBooking {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TicketBooking.class);
 
-    public Ticket bookTicket(Flight flight, Passenger passenger) throws Exception {
+    public Ticket bookTicket(Flight flight, Passenger passenger) {
         LOGGER.info("Booking flight {} for passenger {}",flight ,passenger);
-        TimeUnit.SECONDS.sleep(1);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (Exception e ){
+
+        }
         Ticket ticket =  new Ticket(1L,flight,passenger);
         LOGGER.info("Booked ticket {}",ticket)  ;
         return ticket;
